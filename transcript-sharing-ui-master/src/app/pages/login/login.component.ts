@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
@@ -16,14 +17,19 @@ export class LoginComponent implements OnInit {
   username:string
   organization_name:string
 
-  constructor( public authService :AuthService,private alertService:AlertService,private router: Router) { }
+  constructor( public authService :AuthService,private alertService:AlertService,
+    private router: Router,
+    private titleService:Title) 
+    {
+      this.titleService.setTitle("Transcript Sharing")
+     }
 
   ngOnInit() {
     
   }
   login(username:string,form: NgForm){
     if (form.invalid) {
-      this.alertService.error("Lutfen Bos alanlari Doldurunuz")
+      this.alertService.error("Fill the required fields.")
     setTimeout(()=>{    //<<<---    using ()=> syntax
       this.alertService.clear();
 

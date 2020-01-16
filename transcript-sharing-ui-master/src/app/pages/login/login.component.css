@@ -12,11 +12,17 @@
       font-size: 3.5rem;
     }
 }
-.example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
+.select-organization {
+  color:#C70039;
+}
+.organization-name-section {
+  /*display: flex;*/
+  margin-top: 25px;
+  align-content:center;
+ /* align-items: center;*/
+  height:50px;
+  width:200px;
+  font-style: italic;
 }
     html,
 body {
@@ -30,7 +36,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  background-color:white;
 }
 
 .form-signin {

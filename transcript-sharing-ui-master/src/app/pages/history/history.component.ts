@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { TranscriptService } from 'src/app/services/transcript.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { VirtualTimeScheduler } from 'rxjs';
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-history',
@@ -17,18 +18,18 @@ export class HistoryComponent implements OnInit {
 
   public transcripts: Transcript[] = [];
   public lecturers: Lectures[] = [];
-  indentyNumber:string
+  indentyNumber: string
   public loading = false
-  public lecturPeriod : Period[] = []
-  public index:number
+  public lecturPeriod: Period[] = []
+  public index: number
   public lectur: Lectures[] = [];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   dataSourceLecturer = new MatTableDataSource<Lectures>()
 
-  constructor(private transcriptService :TranscriptService) 
-    {     
+  constructor(private transcriptService: TranscriptService, private titleService: Title) {
+    this.titleService.setTitle("Transcript History");
   }
- 
+
   displayedColumnsLecturer: string[] = [
     "LectureCode",
     "Title",
@@ -37,66 +38,66 @@ export class HistoryComponent implements OnInit {
   ];
 
 
- get getSchoolName():string{
-    let my_object=localStorage.getItem('school')
+  get getSchoolName(): string {
+    let my_object = localStorage.getItem('school')
     return my_object
   }
- 
+
   ngOnInit() {
-   
+
   }
-  getLectures(i:number){
-    this.lecturPeriod=[]
-    this.lecturers=[]
-  
+  getLectures(i: number) {
+    this.lecturPeriod = []
+    this.lecturers = []
+
     this.transcripts[i].Lectures.forEach(data => {
-      let isUsed =false
+      let isUsed = false
 
       //control the lecturePeroid List
-      this.lecturPeriod.forEach(lectPeriod=>{
-        if(data.LecturePeriod==lectPeriod.PeriodName)
-          isUsed=true
+      this.lecturPeriod.forEach(lectPeriod => {
+        if (data.LecturePeriod == lectPeriod.PeriodName)
+          isUsed = true
       })
-     
-      if(!isUsed){
-       let period = new Period()
-       period.PeriodName=data.LecturePeriod
-       period.GPA = data.GPA
-       period.Lectures=[]
-      this.lecturPeriod.push(period)
-    }
 
-      
-    
+      if (!isUsed) {
+        let period = new Period()
+        period.PeriodName = data.LecturePeriod
+        period.GPA = data.GPA
+        period.Lectures = []
+        this.lecturPeriod.push(period)
+      }
+
+
+
     })
 
-    this.lecturPeriod.forEach(genericPeriod=>{
+    this.lecturPeriod.forEach(genericPeriod => {
       this.transcripts[i].Lectures.forEach(data => {
-        
-        if(genericPeriod.PeriodName == data.LecturePeriod){
+
+        if (genericPeriod.PeriodName == data.LecturePeriod) {
           genericPeriod.Lectures.push(data)
         }
       })
-      
+
     })
-    
+
   }
-  getlectur(lectur:Lectures[]){   
-    this.lectur=lectur
-    this.dataSourceLecturer = new MatTableDataSource<Lectures>(this.lectur);      
+  getlectur(lectur: Lectures[]) {
+    this.lectur = lectur
+    this.dataSourceLecturer = new MatTableDataSource<Lectures>(this.lectur);
     this.dataSourceLecturer.paginator = this.paginator;
   }
-  getSearch(){
-    this.transcripts=[]
+  getSearch() {
+    this.transcripts = []
     this.transcriptService.getHistory(this.indentyNumber).subscribe(
-      response => {   
+      response => {
 
-       response.forEach(element => {         
-        this.transcripts.push(element) 
-      });          
-                
-        
-       
+        response.forEach(element => {
+          this.transcripts.push(element)
+        });
+
+
+
 
       })
   }

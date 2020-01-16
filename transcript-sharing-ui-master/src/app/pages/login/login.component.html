@@ -2,22 +2,26 @@
   <form  #form="ngForm" class="form-signin">
 <ng-container *ngIf="authService.isAuthenticated; else elseTemplate">
   <div class="alert alert-success" role="alert">
-    ..., Sistemine hosgeldiniz.
+    Welcome to the Transcript Sharing Channel 
   </div>
-  <a [routerLink]="['/'+this.getSchoolName,'home']"  >Dashbord'a gitmek icin tiklayiniz.</a>
+  <a [routerLink]="['/'+this.getSchoolName,'home']"  >Please, click for Dashboard</a>
   <br><br><br>
   <button type="button" (click)="logOut()"  class="btn btn-outline-danger btn-m btn-block">Log Out</button>
 
 </ng-container>
 <ng-template #elseTemplate>
-  
-  <h5>Lutfen Devam Etmek Istediginiz Okulu Secin</h5>
-<section class="example-section">
-      <mat-checkbox class="example-margin" style="margin-right: 100px; margin-left: 20px;" name="itu" [(ngModel)]="itu" >I.T.U</mat-checkbox>
-      <mat-checkbox class="example-margin" name="yildiz" [(ngModel)]="yildiz" >Yildiz  Teknik</mat-checkbox>
+  <h3 style="font-weight: bold;color:#12505C">Transcript Sharing Blockchain Network</h3>
+  <br>
+  <hr>
+  <h4 class="select-organization">Select Your Organization</h4>
+  <hr>
+<section class="organization-name-section">
+      <mat-checkbox class="example-margin" name="itu" [(ngModel)]="itu"  style="margin-right:75px;" >Istanbul Technical University</mat-checkbox>
+      <mat-checkbox class="example-margin" name="yildiz" [(ngModel)]="yildiz">Yıldız Technical University</mat-checkbox>
 </section>
 <br><br>
-<h5>Lutfen Kullanici Adinizi Girin</h5>
+<h5 class="select-organization">Enter your username </h5>
+<hr>
 <label for="Username" class="sr-only">Username</label>
 <input type="text" id="username" class="form-control" name="username" required [(ngModel)]="username" placeholder="Username" required >
 

@@ -40,14 +40,14 @@
  
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>işlemler</th>
+      <th mat-header-cell *matHeaderCellDef>Operations</th>
       <td mat-cell *matCellDef="let transcripts">
         <button
         [routerLink]="['/'+this.getSchoolName+'/transcipt/edit',transcripts.IdentityNumber]"
           mat-raised-button
           color="primary"
         >
-          güncelle
+          Update
         </button>
 
         <button
@@ -56,7 +56,7 @@
           mat-raised-button
           color="warn"
         >
-          sil
+          Examine
         </button>
       
       </td>

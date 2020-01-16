@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TranscriptService } from 'src/app/services/transcript.service';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Transcript } from 'src/app/models/transcript.model';
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-transcript-form',
@@ -21,9 +22,9 @@ export class TranscriptFormComponent implements OnInit {
     private router: Router,
     private transcriptService:TranscriptService,
     private activeRoute: ActivatedRoute,
-    private fb :FormBuilder
-
-    ) { }
+    private fb :FormBuilder,
+    private titleService: Title
+    ) {this.titleService.setTitle("Add Transcript"); }
     get getControls() {
       return this.TranscriptForm.controls;
     }

@@ -1,0 +1,103 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">History</h1>
+</div>
+<form class="form-inline mt-2 mt-md-0">
+  <input class="form-control mr-sm-2" type="text" name="indentyNumber" [(ngModel)]="indentyNumber" placeholder="Identity Number Enter" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0" (click)="getSearch()" type="submit">Search</button>
+</form>
+<br>
+<br>
+
+<table *ngIf="transcripts.length>0" class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>IdentityNumber</th>
+      <th>UniversityName</th>
+      <th>Department</th>
+
+      <th>Name</th>
+      <th>Surname</th>
+      <th>GPA</th>
+
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transcript of transcripts let i=index" (click)="getLectures(i)">
+      
+      <td>{{transcript.IdentityNumber}}</td>
+      <td>{{transcript.UniversityName}}</td>
+      <td>{{transcript.Department}}</td>
+      <td>{{transcript.Name}}</td>
+
+      <td>{{transcript.Surname}} </td>
+      <td>{{transcript.GPA.toString() | slice:0:4 }} </td>
+
+
+      <td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<div class="row">
+  <div class="col-md-4" style="margin-top: 57px;" *ngIf="lecturPeriod.length>0">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Lectur Period</th>
+          <th>GPA</th>
+        </tr>
+       
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of lecturPeriod" (click)="getlectur(item.Lectures)" >
+          
+          <td>{{item.PeriodName}}</td>
+          
+          <td >{{item.GPA}}</td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+  
+</div>
+<div class="col-md-8" *ngIf="lectur.length>0" >
+  <table style="width: 100%; font-size: large; font-weight: bold;" mat-table [dataSource]="dataSourceLecturer">
+    <!-- Position Column -->
+    
+    <ng-container  matColumnDef="LectureCode">
+    <th mat-header-cell *matHeaderCellDef>LectureCode</th> 
+      <td  mat-cell *matCellDef="let lectur">
+        <strong> {{ lectur.LectureCode }}</strong>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let lectur">
+        {{ lectur.Title }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CRD">
+
+      <th mat-header-cell *matHeaderCellDef>CRD</th>
+      <td mat-cell *matCellDef="let lectur">
+        {{ lectur.CRD }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="GRD">
+      <th mat-header-cell *matHeaderCellDef>GRD  </th>
+      <td mat-cell *matCellDef="let lectur">
+        {{ lectur.GRD}}
+      </td>
+    </ng-container>
+ 
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsLecturer"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsLecturer"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>
+</div>

@@ -214,10 +214,10 @@ router.post('/', async function (req, res, next) {
 
 /**
 * @swagger
-* /itu:
+* /ytu:
 *   patch:
 *     tags:
-*       - itu
+*       - ytu
 *     name: Add
 *     summary: update transcript 
 *     consumes:

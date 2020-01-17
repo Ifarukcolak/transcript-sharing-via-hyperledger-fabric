@@ -22,8 +22,11 @@ export class HistoryComponent implements OnInit {
   public loading = false
   public lecturPeriod: Period[] = []
   public index: number
-  public lectur: Lectures[] = [];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  public lectur: Lectures[] = []; 
+  public productsPerPage = 5;
+  public selectedPage = 1;
+
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   dataSourceLecturer = new MatTableDataSource<Lectures>()
 
   constructor(private transcriptService: TranscriptService, private titleService: Title) {
@@ -71,6 +74,8 @@ export class HistoryComponent implements OnInit {
 
     })
 
+    
+
     this.lecturPeriod.forEach(genericPeriod => {
       this.transcripts[i].Lectures.forEach(data => {
 
@@ -96,9 +101,24 @@ export class HistoryComponent implements OnInit {
           this.transcripts.push(element)
         });
 
-
-
-
       })
   }
+  get transcriptsPage():Transcript[]{
+    let index = (this.selectedPage - 1) * this.productsPerPage;
+
+    return this.transcripts.slice(index, index + this.productsPerPage)
+
+  }
+   pageNumbers(): number[] 
+  {
+      return Array(Math.ceil(this.transcripts.length / this.productsPerPage))
+          .fill(0) // ilk basta dizinin index degeri 0 elemanina esitliyoruz
+          .map((a, i) => i + 1); // sonrasinda tum elemanlari gezip onlari 1 artiriyoruz..
+  }
+
+  changePage(p: number) 
+  {
+      this.selectedPage = p;
+  }
+
 }

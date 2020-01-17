@@ -35,7 +35,9 @@ export class TranscriptListComponent implements OnInit {
   dataSource = new MatTableDataSource<Transcript>()
   dataSourceLecturer = new MatTableDataSource<Lectures>()
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild('transcript',{ static: false }) paginator: MatPaginator;
+  @ViewChild('lecture',{ static: false }) paginator1: MatPaginator;
+
 
   constructor(private transcriptService: TranscriptService, private titleService: Title) {
     this.titleService.setTitle("List Transcripts")
@@ -66,7 +68,7 @@ export class TranscriptListComponent implements OnInit {
     })
 
     this.dataSourceLecturer = new MatTableDataSource<Lectures>(this.lecturers);
-    this.dataSourceLecturer.paginator = this.paginator;
+    this.dataSourceLecturer.paginator=this.paginator1
 
   }
   get getSchoolName(): string {
@@ -86,7 +88,8 @@ export class TranscriptListComponent implements OnInit {
           this.transcripts.push(element.Record)
 
         });
-
+        console.log(this.transcripts);
+        
 
         this.dataSource = new MatTableDataSource<Transcript>(this.transcripts);
         this.dataSource.paginator = this.paginator;

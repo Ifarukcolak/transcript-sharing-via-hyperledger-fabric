@@ -9,12 +9,12 @@ export class Transcript {
         public Name?:string,
         public Surname?:string,
         public Period?:string,
-        public BirthDate?:Date,
+        public BirthDate?:string,
         public BirthPlace?:string,
         public FatherName?:string,
         public GPA?:number,
         public RegistryDate?:string,
-        public RegistryType?:Date,
+        public RegistryType?:string,
         public Lectures?:Array<Lectures>,
 
         

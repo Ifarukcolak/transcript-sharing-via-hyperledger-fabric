@@ -52,7 +52,7 @@
 
         <button
           class="ml-1"
-          (click)="deleteTrancript(transcripts)"
+          [routerLink]="['/'+this.getSchoolName+'/transciptone/examine',transcripts.IdentityNumber]"
           mat-raised-button
           color="warn"
         >
@@ -66,7 +66,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator #transcript [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   
 </div>
 <br><br>
@@ -108,6 +108,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumnsLecturer"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator #lecture [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   
 </div>

@@ -20,6 +20,7 @@ import { TranscriptListComponent } from './pages/transcript/transcript-list/tran
 import { HomeComponent } from './pages/home/home.component';
 import { TranscriptService } from './services/transcript.service';
 import { HistoryComponent } from './pages/history/history.component';
+import { ExamineComponent } from './pages/examine/examine.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { HistoryComponent } from './pages/history/history.component';
       TranscriptListComponent,
       TranscriptFormComponent,
       HomeComponent,
-      HistoryComponent
+      HistoryComponent,
+      ExamineComponent
    ],
    imports: [
       BrowserModule,

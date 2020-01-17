@@ -118,8 +118,11 @@ class Transactipt extends Contract {
             throw new Error(`${identityNumber} does not exist`);
         }
         const transcript = JSON.parse(transcriptModelAsBytes.toString());
-        if (!isArray(lectures))
+        if (!Object.prototype.toString.call(lectures) === '[object Array]')
             lectures = JSON.parse(lectures);
+
+        if (!Object.prototype.toString.call(transcript.Lectures) === '[object Array]')
+            transcript.Lectures = JSON.parse(transcript.Lectures);
 
         for (let element of lectures) {
             transcript.Lectures.push(element);
@@ -131,5 +134,3 @@ class Transactipt extends Contract {
 }
 
 module.exports = Transactipt
-
-15, 1 - 8        All

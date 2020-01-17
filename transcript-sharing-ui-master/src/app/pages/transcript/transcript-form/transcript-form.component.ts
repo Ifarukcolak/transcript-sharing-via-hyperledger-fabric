@@ -18,6 +18,7 @@ export class TranscriptFormComponent implements OnInit {
   public transcripts: Transcript[] = [];
   public transcript :Transcript=new Transcript()
   success: boolean;
+  lecturPeriod :String[] = ["2015-2016 Fall","2015-2016 Spring","2016-2017 Fall","2016-2017 Spring"]
   constructor(
     private router: Router,
     private transcriptService:TranscriptService,
@@ -39,10 +40,10 @@ export class TranscriptFormComponent implements OnInit {
       FatherName: new FormControl("", Validators.required),
       Surname: new FormControl("", Validators.required),
       Period: new FormControl("", Validators.required),
-      BirthDate: new FormControl(Date, Validators.required),
+      BirthDate: new FormControl("", Validators.required),
       BirthPlace: new FormControl("", Validators.required),
       RegistryType: new FormControl("", Validators.required),
-      RegistryDate: new FormControl(Date, Validators.required),
+      RegistryDate: new FormControl("", Validators.required),
       Lectures: this.fb.array([ this.createItem() ])
 
    });
@@ -72,7 +73,6 @@ export class TranscriptFormComponent implements OnInit {
       this.getControls.BirthDate.setValue(this.transcript.BirthDate);    
       this.getControls.BirthPlace.setValue(this.transcript.BirthPlace);    
       this.getControls.FatherName.setValue(this.transcript.FatherName);    
-      this.getControls.Lectures.setValue(this.transcript.Lectures);    
 
 
 
@@ -86,6 +86,7 @@ export class TranscriptFormComponent implements OnInit {
       Title: '',
       CRD: '',
       GRD: '',
+      LecturePeriod: '',
 
     });
   }
@@ -98,7 +99,7 @@ export class TranscriptFormComponent implements OnInit {
   }
   onSubmit() {
       
-      this.transcriptService.saveTranscript(this.TranscriptForm.value,this.transcripts)
+      this.transcriptService.saveTranscript(this.TranscriptForm.value,this.transcripts,this.activeRoute.snapshot.params['id'])
       this.router.navigate(['/'+this.getSchoolName+'/transcipt']);
 
     

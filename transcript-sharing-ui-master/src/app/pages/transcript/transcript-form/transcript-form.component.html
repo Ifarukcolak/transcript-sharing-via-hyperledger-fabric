@@ -10,7 +10,101 @@
 > 
 <div class="form-container">
   
+ <ng-container *ngIf="editing; else elseTemplate">
+   
+  <mat-form-field >
+    <input type="text" readonly formControlName="IdentityNumber" matInput placeholder="Identity Number"/>
+  
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" readonly formControlName="UniversityName" matInput placeholder="University Name"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="UniversityId" matInput placeholder="University Id"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="Department" matInput placeholder="Department"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="Surname" matInput placeholder="Surname"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="Name" matInput placeholder="Name"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="FatherName" matInput placeholder="Father Name "/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="Period" matInput placeholder="Period"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text"readonly formControlName="BirthDate" matInput placeholder="Birth Date"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="BirthPlace" matInput placeholder="Birth Place"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="RegistryType" matInput placeholder="Registry Type"/>
+  
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" readonly formControlName="RegistryDate" matInput placeholder="Registry Date"/>
+  
+  </mat-form-field>
  
+  <div class="group-gap" formArrayName="Lectures">
+    <h5 class="mb-3">Add Lectures</h5>
+    <div class="mb-3">
+      <button type="button" class="btn btn-sm btn-success mb-3 btn-block" (click)="addItem()">Add Lecture</button>
+      <ul class="subjectList">
+        <li style="list-style:decimal;" *ngFor="let item of addDynamicElement.controls; let i = index">
+          <div [formGroupName]="i">
+            <mat-form-field style="margin-right: 20px;"> 
+              <input type="text" formControlName="LectureCode" matInput placeholder="Lecture Code"/>
+            
+            </mat-form-field>
+        
+            <mat-form-field style="margin-right: 20px;">
+              <input  type="text" formControlName="Title" matInput placeholder="Title"/>
+            
+            </mat-form-field>
+            <mat-form-field style="margin-right: 20px;">
+              <input  type="text" formControlName="CRD" matInput placeholder="CRD"/>
+            
+            </mat-form-field>
+            <mat-form-field style="margin-right: 20px;">
+              <input  type="text" formControlName="GRD" matInput placeholder="GRD"/>
+            
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>lectur Period</mat-label>
+              <mat-select formControlName="LecturePeriod">
+                <mat-option *ngFor="let lectur of lecturPeriod" [value]="lectur">
+                  {{lectur}}
+                </mat-option>
+              </mat-select>            
+            </mat-form-field>
+
+          </div>
+         
+        </li>
+      </ul>
+    </div>
+  </div>
+
+ </ng-container>
+ <ng-template #elseTemplate>
+   
   <mat-form-field>
     <input type="text" formControlName="IdentityNumber" matInput placeholder="Identity Number"/>
   
@@ -80,20 +174,30 @@
               <input  type="text" formControlName="CRD" matInput placeholder="CRD"/>
             
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field style="margin-right: 20px;">
               <input  type="text" formControlName="GRD" matInput placeholder="GRD"/>
             
             </mat-form-field>
+            <mat-form-field>
+              <mat-label>lectur Period</mat-label>
+              <mat-select formControlName="LecturePeriod">
+                <mat-option *ngFor="let lectur of lecturPeriod" [value]="lectur">
+                  {{lectur}}
+                </mat-option>
+              </mat-select>            
+            </mat-form-field>
+
           </div>
          
         </li>
       </ul>
     </div>
-
   </div>
 
+ </ng-template>
+ 
   <button  [disabled]="!TranscriptForm.valid" style="margin-right: 40px; float: right;" mat-raised-button color="primary">
-    Create Transcript
+    {{ editing ? "Edit": "Create" }} Transcript
     
   </button>
   <button  mat-raised-button color="warn" [routerLink]="['/'+this.getSchoolName+'/transcipt']">Cancel</button>

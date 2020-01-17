@@ -39,6 +39,15 @@ export class TranscriptService implements OnInit {
        return this.http.get<Transcript[]>(this.path + this.getSchoolName+'/one/history?'+ params.toString(), {headers:headers})
       
        }
+       getOne(identity_number:string){
+        const params = new HttpParams()
+        .set('identity_number', identity_number)
+        let headers = new HttpHeaders();
+        headers = headers.append('Content-Type','application/json');
+      
+       return this.http.get<Transcript[]>(this.path + this.getSchoolName+'/one?'+ params.toString(), {headers:headers})
+      
+       }
     addTranscript(Transcript: Transcript): Observable<Transcript> {
         let headers = new HttpHeaders({
           'accept': 'application/json',
@@ -46,7 +55,15 @@ export class TranscriptService implements OnInit {
         })  
       return this.http.post<Transcript>(this.path + this.getSchoolName, Transcript,{headers:headers})
       }
-      
+      updateTranscript(Transcript: Transcript,identity_number:string): Observable<Transcript> {
+        const params = new HttpParams()
+        .set('identity_number', identity_number)
+        let headers = new HttpHeaders({
+          'accept': 'application/json',
+          'Content-Type':'application/json'
+        })  
+      return this.http.patch<Transcript>(this.path + this.getSchoolName+'?' + params.toString() , Transcript,{headers:headers})
+      }
       deleteTranscript(Transcript: Transcript,transcripts: Transcript[]) {
         let headers = new HttpHeaders({
           'accept': 'application/json',
@@ -63,9 +80,9 @@ export class TranscriptService implements OnInit {
            
       
       } 
-      saveTranscript(Transcript: Transcript,transcripts: Transcript[]) {
-       let object= transcripts.find(data=>{data.IdentityNumber == Transcript.IdentityNumber })
-        if (object == null || object== undefined) {
+      saveTranscript(Transcript: Transcript,transcripts: Transcript[],id:string) {
+       
+        if (id == null || id== undefined) {
           this.addTranscript(Transcript)
             .subscribe(p =>{
               transcripts.push(p)
@@ -77,7 +94,7 @@ export class TranscriptService implements OnInit {
             }
             );
          } else {
-          this.addTranscript(Transcript).subscribe(p => {
+          this.updateTranscript(Transcript,id).subscribe(p => {
             transcripts.splice(
               transcripts.findIndex(p => p.IdentityNumber == Transcript.IdentityNumber),
               1,

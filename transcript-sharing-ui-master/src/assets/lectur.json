@@ -1,0 +1,60 @@
+[
+    {
+      "LectureCode": "BLG 354E",
+      "Title": "Signal and Systems for Computer Engineers",
+      "CRD": "3.0",
+      "GRD": "CB",
+	 "LecturePeriod":"2018-2019 Fall"
+    },
+    {
+      "LectureCode": "BLG 443",
+      "Title": "Discrete Event Simulation",
+      "CRD": "2.0",
+      "GRD": "BA",
+	 "LecturePeriod":"2018-2019 Fall"
+    },
+
+    {
+      "LectureCode": "BLG 322",
+      "Title": "Computer Architecture 1",
+      "CRD": "3.0",
+      "GRD": "AA",
+	 "LecturePeriod":"2018-2019 Spring"
+    },
+    {
+      "LectureCode": "ING 202",
+      "Title": "English II",
+      "CRD": "3.0",
+      "GRD": "AA",
+	 "LecturePeriod":"2018-2019 Spring"
+    },
+    {
+      "LectureCode": "BLG 354E",
+      "Title": "Signal and Systems for Computer Engineers",
+      "CRD": "3.0",
+      "GRD": "CB",
+	 "LecturePeriod":"2018-2019 Fall"
+    },
+    {
+      "LectureCode": "BLG 443E",
+      "Title": "Discrete Event Simulation 1",
+      "CRD": "2.0",
+      "GRD": "BA",
+	 "LecturePeriod":"2018-2019 Fall"
+    },
+
+    {
+      "LectureCode": "BLG 322E",
+      "Title": "Computer Architecture",
+      "CRD": "3.0",
+      "GRD": "AA",
+	 "LecturePeriod":"2018-2019 Spring"
+    },
+    {
+      "LectureCode": "ING 201",
+      "Title": "English III",
+      "CRD": "3.0",
+      "GRD": "AA",
+	 "LecturePeriod":"2018-2019 Spring"
+    }
+  ]

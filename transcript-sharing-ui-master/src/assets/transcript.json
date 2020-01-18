@@ -1,0 +1,31 @@
+[ 
+    {
+    "IdentityNumber": "78293251236",
+    "UniversityName": "Istanbul Technical University",
+    "UniversityId": "150160513",
+    "Department": "Computer Engineering",
+    "Name": "Omer Kardeşim",
+    "Surname": "Şahin",
+    "Period": "2017-2018 Fall",
+    "BirthDate": "26.04.1994",
+    "BirthPlace": "Vezirköprü",
+    "FatherName": "Faruk",
+    "RegistryDate": "07.10.2016",
+    "RegistryType": "Transfer by Central R.S."
+    },
+  {
+    "IdentityNumber": "78293251236",
+    "UniversityName": "Istanbul Technical University",
+    "UniversityId": "150160513",
+    "Department": "Computer Engineering",
+    "Name": "Berati",
+    "Surname": "Şahin",
+    "Period": "2017-2018 Fall",
+    "BirthDate": "26.04.1994",
+    "BirthPlace": "Vezirköprü",
+    "FatherName": "Faruk",
+    "RegistryDate": "07.10.2016",
+    "RegistryType": "Transfer by Central R.S."
+    
+ }
+  ]

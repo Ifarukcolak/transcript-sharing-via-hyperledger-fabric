@@ -5,6 +5,8 @@ import { TranscriptService } from 'src/app/services/transcript.service';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Transcript } from 'src/app/models/transcript.model';
 import { Title } from "@angular/platform-browser";
+import  *  as  data  from  'src/assets/transcript.json';
+import  *  as  lecturData  from  'src/assets/lectur.json';
 
 @Component({
   selector: 'app-transcript-form',
@@ -15,10 +17,14 @@ export class TranscriptFormComponent implements OnInit {
   TranscriptForm: FormGroup;
   Lectures: FormArray;
   editing:boolean
+  checked=false
   public transcripts: Transcript[] = [];
+  public lecturs: Lectures[] = [];
+
   public transcript :Transcript=new Transcript()
+
   success: boolean;
-  lecturPeriod :String[] = ["2015-2016 Fall","2015-2016 Spring","2016-2017 Fall","2016-2017 Spring"]
+  lecturPeriod :String[] = ["2015-2016 Fall","2015-2016 Spring","2016-2017 Fall","2016-2017 Spring","2018-2019 Spring","2018-2019 Fall"]
   constructor(
     private router: Router,
     private transcriptService:TranscriptService,
@@ -31,6 +37,7 @@ export class TranscriptFormComponent implements OnInit {
     }
   ngOnInit() {
     
+
     this.TranscriptForm = this.fb.group({
       IdentityNumber: new FormControl("", Validators.required),
       UniversityName: new FormControl("", Validators.required),
@@ -80,7 +87,72 @@ export class TranscriptFormComponent implements OnInit {
     })
    }
   }
+  onClick(){
+    let array= JSON.parse(JSON.stringify(data))
+    this.transcripts=array.default    
+    let number=Math.ceil( Math.random()*(this.transcripts.length));
+    
+    this.transcript= this.transcripts[number-1]
+    this.getControls.IdentityNumber.setValue(this.transcript.IdentityNumber);    
+      this.getControls.UniversityName.setValue(this.transcript.UniversityName);    
+      this.getControls.UniversityId.setValue(this.transcript.UniversityId);    
+      this.getControls.Department.setValue(this.transcript.Department);    
+      this.getControls.Name.setValue(this.transcript.Name);    
+      this.getControls.Surname.setValue(this.transcript.Surname);    
+      this.getControls.Period.setValue(this.transcript.Period);    
+      this.getControls.RegistryDate.setValue(this.transcript.RegistryDate);    
+      this.getControls.RegistryType.setValue(this.transcript.RegistryType);    
+      this.getControls.BirthDate.setValue(this.transcript.BirthDate);    
+      this.getControls.BirthPlace.setValue(this.transcript.BirthPlace);    
+      this.getControls.FatherName.setValue(this.transcript.FatherName);  
+  }
+  fileLectur(){
+    if(this.lecturs.length>0){
+      this.Lectures.clear()
+      this.checked=true
+      this.checked=false
+
+    }
+    
+    let array= JSON.parse(JSON.stringify(lecturData))   
+    let number=Math.ceil( Math.random()*(array.default.length));
+    this.lecturs=[]
+     for (let index = 0; index < number-1; index++) {
+      let r = Math.ceil( Math.random()*(array.default.length-1));
+      let t = array.default[r];
+      if(this.lecturs.length>0){
+        this.lecturs.forEach(data=>{
+          if(data.Title!=t.Title){
+            this.lecturs[index] = array.default[r];
+          }
+          else{
+            let control=true
+            while(control){
+              r = Math.ceil( Math.random()*(array.default.length-1));
+              let t = array.default[r];
+              if(data.Title!=t.Title){
+                this.lecturs[index] = array.default[r];
+                control=false
+              }
+            }
+          }
+        })  
+      }else{
+        this.lecturs[index] = t;
+
+      }
+    
+      }
+      
+    this.Lectures=this.TranscriptForm.get('Lectures') as FormArray
+    for (let index = 0; index <  number-2; index++) {
+      this.Lectures.push(this.createItem())
+    }
+    this.Lectures.patchValue(this.lecturs)
+
+  }
   createItem(): FormGroup {
+    
     return this.fb.group({
       LectureCode: '',
       Title: '',
@@ -91,11 +163,18 @@ export class TranscriptFormComponent implements OnInit {
     });
   }
   get addDynamicElement() {
+    
     return this.TranscriptForm.get('Lectures') as FormArray
   }
   addItem(): void {
+    
     this.Lectures=this.TranscriptForm.get('Lectures') as FormArray
+    console.log(this.createItem());
+          
     this.Lectures.push(this.createItem());
+    console.log(this.Lectures);
+    
+    
   }
   onSubmit() {
       
